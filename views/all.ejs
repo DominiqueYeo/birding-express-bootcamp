@@ -1,0 +1,22 @@
+<%- include('header'); -%>
+
+  <div class="container">
+    <h1 class="text-center">Hidden</h1>
+  </div>
+  <div class="container mt-5">
+    <h1 class="text-center">All Sightings</h1>
+    <div class="row justify-content-center">
+    <form action="/note" method="get">
+      <button class="btn btn-danger btn-sm" type="submit" value="Submit New Birb" />Submit New Birb</button>
+    </form>
+    </div>
+    <%= console.log(results)%>
+    <div class="row justify-content-center">
+      <ul>
+        <% results.forEach((row,index)=> { %>
+        <li><a href="/note/<%=`${row.id}`%>"><%= `Note Number:${row.id}`%></a></li>
+        <% }); %>
+      </ul>
+    </div>
+  </div>
+<%- include('footer'); -%>
