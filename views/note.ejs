@@ -4,6 +4,8 @@
   </div>
   <div class="container mt-5">
     <h1 class="text-center">New Birb</h1>
+    <% console.log(speciesList) %> 
+    <% console.log(behavioursList) %>
     <form action="/note" method="POST">
       <div class="mb-3">
         <label for="habitat">Habitat:</label><br />
@@ -18,10 +20,6 @@
         <input type="text" id="appearance" name="appearance" /><br />
       </div>
       <div class="mb-3">
-        <label for="behaviour">Behaviour:</label><br />
-        <input type="text" id="behaviour" name="behaviour" /><br />
-      </div>
-      <div class="mb-3">
         <label for="vocalisation">Vocalisation:</label><br />
         <input type="text" id="vocalisation" name="vocalisation" /><br />
       </div>
@@ -29,6 +27,25 @@
         <label for="flock_size">Flock Size:</label><br />
         <input type="text" id="flock_size" name="flock_size" /><br />
       </div>
+      <div class="mb-3">
+        <label for="species_id">Species:</label><br />
+        <select name="species_id">
+          <% speciesList.forEach((species) => { %>
+            <option value="<%= species.id %>"><%= species.name %></option>
+            <% }); %>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="behaviour_id">Behaviour:</label><br />
+          <% behavioursList.forEach((behaviour) => { %>
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="behaviour_id" value="<%= behaviour.id %>" />
+            <label class="form-check-label"><%= behaviour.behaviour_type.charAt(0).toUpperCase()+behaviour.behaviour_type.slice(1) %></label>
+            </div>
+          <% }); %>
+          <!-- <label for="behaviour_id">Behaviour:</label><br />
+          <input type="text" id="behaviour_id" name="behaviour_id" /><br /> -->
+        </div>
       <div class="row justify-content-center">
         <button class="btn btn-info btn-lg mx-2" type="submit" />Submit</button>
       </div>

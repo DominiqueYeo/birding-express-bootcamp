@@ -6,11 +6,14 @@
       <div class="row justify-content-center">
         <h1>Birb Note</h1>
       </div>
-      <% console.log(results[0]) %>
+      <% console.log(behavioursList) %>
       <ul>
         <% Object.keys(results[0]).forEach((sightAttr)=> { %>
         <li><%= `${sightAttr.charAt(0).toUpperCase()+sightAttr.slice(1).replace('_',' ')} : ${results[0][sightAttr]} `%></li>
         <% }); %>
+        <% const behaviourList = behave.map((entry)=>entry.behaviour_type.charAt(0).toUpperCase()+entry.behaviour_type.slice(1)) %> 
+        <% console.log('list',behaviourList) %> 
+        <li><%= `Behaviours : ${behaviourList.toString()}` %></li>
       </ul>
       <div class="row justify-content-center ">
         <form class="justify-content-center"
@@ -37,10 +40,6 @@
         <input type="text" value="<%= `${results[0]['appearance']} `%>" id="appearance" name="appearance" /><br />
       </div>
       <div class="mb-3">
-        <label for="behaviour">Behaviour:</label><br />
-        <input type="text" value="<%= `${results[0]['behaviour']} `%>" id="behaviour" name="behaviour" /><br />
-      </div>
-      <div class="mb-3">
         <label for="vocalisation">Vocalisation:</label><br />
         <input type="text" value="<%= `${results[0]['vocalisation']} `%>" id="vocalisation" name="vocalisation" /><br />
       </div>
@@ -48,6 +47,25 @@
         <label for="flock_size">Flock Size:</label><br />
         <input type="text" value="<%= `${results[0]['flock_size']} `%>" id="flock_size" name="flock_size" /><br />
       </div>
+      <div class="mb-3">
+        <label for="species_id">Species:</label><br />
+        <select name="species_id">
+          <% speciesList.forEach((species) => { %>
+            <option value="<%= species.id %>"><%= species.name %></option>
+            <% }); %>
+        </select>
+      </div>
+      <div class="mb-3">
+          <label for="behaviour_id">Behaviour:</label><br />
+          <% behavioursList.forEach((behaviour) => { %>
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="behaviour_id" value="<%= behaviour.id %>" />
+            <label class="form-check-label"><%= behaviour.behaviour_type.charAt(0).toUpperCase()+behaviour.behaviour_type.slice(1) %></label>
+            </div>
+          <% }); %>
+          <!-- <label for="behaviour_id">Behaviour:</label><br />
+          <input type="text" id="behaviour_id" name="behaviour_id" /><br /> -->
+        </div>
       <div class="row justify-content-center">
         <button class="btn btn-info btn-lg mx-2" type="submit" />Submit</button>
       </div>
